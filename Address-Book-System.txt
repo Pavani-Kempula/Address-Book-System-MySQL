@@ -1,0 +1,333 @@
+Welcome to the Address Book Service
+
+UC1 :
+
+mysql> create database Address_Book_Service;
+Query OK, 1 row affected (0.37 sec)
+
+mysql> show databases;
++----------------------+
+| Database             |
++----------------------+
+| address_book_service |
+| information_schema   |
+| mysql                |
+| pavani               |
+| payroll_service      |
+| performance_schema   |
+| suma                 |
+| sys                  |
++----------------------+
+8 rows in set (0.10 sec)
+
+mysql> use address_book_service;
+Database changed
+
+UC2 :
+
+mysql> create table address_book
+    -> (first_name varchar(100),
+    -> last_name varchar(100),
+    -> address varchar(50),
+    -> city varchar(100),
+    -> state varchar(100),
+    -> zip_code int,
+    -> phone_number BIGINT(10),
+    -> email varchar(200)
+    -> );
+Query OK, 0 rows affected, 1 warning (1.69 sec)
+
+mysql> desc address_book;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| first_name   | varchar(100) | YES  |     | NULL    |       |
+| last_name    | varchar(100) | YES  |     | NULL    |       |
+| address      | varchar(50)  | YES  |     | NULL    |       |
+| city         | varchar(100) | YES  |     | NULL    |       |
+| state        | varchar(100) | YES  |     | NULL    |       |
+| zip_code     | int          | YES  |     | NULL    |       |
+| phone_number | bigint       | YES  |     | NULL    |       |
+| email        | varchar(200) | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+8 rows in set (0.04 sec)
+
+UC3:
+
+mysql> insert into address_book (first_name, last_name, address, city, state, zip_code, phone_number, email) values
+    -> ('Pavani', 'Kempula', 'Piler', 'Tirupati', 'Andhra_Pradesh', 517214, 9876543215, 'kempulaiyrw@gmail.com'),
+    -> ('Swathi', 'Nehan', 'Aggrahara', 'Hyderabad', 'Telangana', 513624, 9854343215, 'padrtkdrw@gmail.com'),
+    -> ('Priya', 'Janu', 'Electronic_City', 'Bangalore', 'Karnataka', 545624, 914343215, 'hjfdelw@gmail.com'),
+    -> ('Deepu', 'Manas', 'Yeswanthpur', 'Chennai', 'Tamilnadu', 525134, 7843265437, 'ptiamdjj@gmail.com');
+Query OK, 4 rows affected (0.30 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from address_book;
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+
+| first_name | last_name | address         | city      | state          | zip_code | phone_number | email                 |
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+
+| Pavani     | Kempula   | Piler           | Tirupati  | Andhra_Pradesh |   517214 |   9876543215 | kempulaiyrw@gmail.com |
+| Swathi     | Nehan     | Aggrahara       | Hyderabad | Telangana      |   513624 |   9854343215 | padrtkdrw@gmail.com   |
+| Priya      | Janu      | Electronic_City | Bangalore | Karnataka      |   545624 |    914343215 | hjfdelw@gmail.com     |
+| Deepu      | Manas     | Yeswanthpur     | Chennai   | Tamilnadu      |   525134 |   7843265437 | ptiamdjj@gmail.com    |
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+
+4 rows in set (0.00 sec)
+
+UC4:
+
+mysql> select * from address_book;
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+
+| first_name | last_name | address         | city      | state          | zip_code | phone_number | email                 |
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+
+| Pavani     | Kempula   | Piler           | Tirupati  | Andhra_Pradesh |   517214 |   9876543215 | kempulaiyrw@gmail.com |
+| Swathi     | Nehan     | Aggrahara       | Hyderabad | Telangana      |   513624 |   9854343215 | padrtkdrw@gmail.com   |
+| Priya      | Janu      | Electronic_City | Bangalore | Karnataka      |   545624 |    914343215 | hjfdelw@gmail.com     |
+| Deepu      | Manas     | Yeswanthpur     | Chennai   | Tamilnadu      |   525134 |   7843265437 | ptiamdjj@gmail.com    |
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+
+4 rows in set (0.00 sec)
+
+mysql> update address_book set address = 'vellore' where first_name = 'Deepu';
+Query OK, 1 row affected (0.35 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from address_book;
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+
+| first_name | last_name | address         | city      | state          | zip_code | phone_number | email                 |
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+
+| Pavani     | Kempula   | Piler           | Tirupati  | Andhra_Pradesh |   517214 |   9876543215 | kempulaiyrw@gmail.com |
+| Swathi     | Nehan     | Aggrahara       | Hyderabad | Telangana      |   513624 |   9854343215 | padrtkdrw@gmail.com   |
+| Priya      | Janu      | Electronic_City | Bangalore | Karnataka      |   545624 |    914343215 | hjfdelw@gmail.com     |
+| Deepu      | Manas     | vellore         | Chennai   | Tamilnadu      |   525134 |   7843265437 | ptiamdjj@gmail.com    |
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+
+4 rows in set (0.05 sec)
+
+UC5:
+
+mysql> delete from address_book where first_name = 'Swathi';
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from address_book;
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+
+| first_name | last_name | address         | city      | state          | zip_code | phone_number | email                 |
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+
+| Pavani     | Kempula   | Piler           | Tirupati  | Andhra_Pradesh |   517214 |   9876543215 | kempulaiyrw@gmail.com |
+| Priya      | Janu      | Electronic_City | Bangalore | Karnataka      |   545624 |    914343215 | hjfdelw@gmail.com     |
+| Deepu      | Manas     | vellore         | Chennai   | Tamilnadu      |   525134 |   7843265437 | ptiamdjj@gmail.com    |
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+
+3 rows in set (0.00 sec)
+
+UC6:
+
+mysql> select first_name from address_book where city = 'Tirupati';
++------------+
+| first_name |
++------------+
+| Pavani     |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select first_name from address_book where city = 'Chennai';
++------------+
+| first_name |
++------------+
+| Deepu      |
++------------+
+1 row in set (0.00 sec)
+
+UC7:
+
+mysql> select state,count(first_name) from address_book where state = 'Andhra_Pradesh';
++----------------+-------------------+
+| state          | count(first_name) |
++----------------+-------------------+
+| Andhra_Pradesh |                 1 |
++----------------+-------------------+
+1 row in set (0.02 sec)
+
+mysql> select city,count(first_name) from address_book where city = 'Bangalore';
++-----------+-------------------+
+| city      | count(first_name) |
++-----------+-------------------+
+| Bangalore |                 1 |
++-----------+-------------------+
+1 row in set (0.00 sec)
+
+UC8:
+
+mysql> select first_name, last_name, address, city, state, zip_code, phone_number, email from address_book order by first_name;
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+
+| first_name | last_name | address         | city      | state          | zip_code | phone_number | email                 |
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+
+| Deepu      | Manas     | vellore         | Chennai   | Tamilnadu      |   525134 |   7843265437 | ptiamdjj@gmail.com    |
+| Pavani     | Kempula   | Piler           | Tirupati  | Andhra_Pradesh |   517214 |   9876543215 | kempulaiyrw@gmail.com |
+| Priya      | Janu      | Electronic_City | Bangalore | Karnataka      |   545624 |    914343215 | hjfdelw@gmail.com     |
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+
+3 rows in set (0.00 sec)
+
+UC9:
+
+mysql> alter table address_book add type varchar(100) after email;
+Query OK, 0 rows affected (1.90 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc address_book;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| first_name   | varchar(100) | YES  |     | NULL    |       |
+| last_name    | varchar(100) | YES  |     | NULL    |       |
+| address      | varchar(50)  | YES  |     | NULL    |       |
+| city         | varchar(100) | YES  |     | NULL    |       |
+| state        | varchar(100) | YES  |     | NULL    |       |
+| zip_code     | int          | YES  |     | NULL    |       |
+| phone_number | bigint       | YES  |     | NULL    |       |
+| email        | varchar(200) | YES  |     | NULL    |       |
+| type         | varchar(100) | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+9 rows in set (0.09 sec)
+
+mysql> update address_book set type = 'sister' where first_name = 'Deepu';
+Query OK, 1 row affected (0.15 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update address_book set type = 'Friend' where first_name = 'Priya';
+Query OK, 1 row affected (0.13 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from address_book;
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+--------+
+| first_name | last_name | address         | city      | state          | zip_code | phone_number | email                 | type   |
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+--------+
+| Pavani     | Kempula   | Piler           | Tirupati  | Andhra_Pradesh |   517214 |   9876543215 | kempulaiyrw@gmail.com | NULL   |
+| Priya      | Janu      | Electronic_City | Bangalore | Karnataka      |   545624 |    914343215 | hjfdelw@gmail.com     | Friend |
+| Deepu      | Manas     | vellore         | Chennai   | Tamilnadu      |   525134 |   7843265437 | ptiamdjj@gmail.com    | sister |
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+--------+
+3 rows in set (0.04 sec)
+
+UC10:
+
+mysql> update address_book set type = 'Friend' where first_name = 'Priya';
+Query OK, 1 row affected (0.13 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from address_book;
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+--------+
+| first_name | last_name | address         | city      | state          | zip_code | phone_number | email                 | type   |
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+--------+
+| Pavani     | Kempula   | Piler           | Tirupati  | Andhra_Pradesh |   517214 |   9876543215 | kempulaiyrw@gmail.com | NULL   |
+| Priya      | Janu      | Electronic_City | Bangalore | Karnataka      |   545624 |    914343215 | hjfdelw@gmail.com     | Friend |
+| Deepu      | Manas     | vellore         | Chennai   | Tamilnadu      |   525134 |   7843265437 | ptiamdjj@gmail.com    | sister |
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+--------+
+3 rows in set (0.04 sec)
+
+mysql> select type,count(first_name) from address_book where type = 'Friend';
++--------+-------------------+
+| type   | count(first_name) |
++--------+-------------------+
+| Friend |                 1 |
++--------+-------------------+
+1 row in set (0.00 sec)
+
+mysql> select type,count(first_name) from address_book where type = 'Sister';
++--------+-------------------+
+| type   | count(first_name) |
++--------+-------------------+
+| sister |                 1 |
++--------+-------------------+
+1 row in set (0.00 sec)
+
+UC11:
+
+mysql> insert into address_book (first_name, last_name, address, city, state, zip_code, phone_number, email, type) values
+    -> ('Dhaanvi', 'Chikku', 'whitefield', 'Bangalore', 'Karnataka', 526314, 7865432178, 'dhaanvisree@gmail.com', 'Family'),
+    -> ('Vijay', 'vijju', 'varthur', 'Tirupati', 'Andhra_Pradesh', 216314, 6543261234, 'prasad@gmail.com', 'Friend');
+Query OK, 2 rows affected (0.14 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from address_book;
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+--------+
+| first_name | last_name | address         | city      | state          | zip_code | phone_number | email                 | type   |
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+--------+
+| Pavani     | Kempula   | Piler           | Tirupati  | Andhra_Pradesh |   517214 |   9876543215 | kempulaiyrw@gmail.com | NULL   |
+| Priya      | Janu      | Electronic_City | Bangalore | Karnataka      |   545624 |    914343215 | hjfdelw@gmail.com     | Friend |
+| Deepu      | Manas     | vellore         | Chennai   | Tamilnadu      |   525134 |   7843265437 | ptiamdjj@gmail.com    | sister |
+| Dhaanvi    | Chikku    | whitefield      | Bangalore | Karnataka      |   526314 |   7865432178 | dhaanvisree@gmail.com | Family |
+| Vijay      | vijju     | varthur         | Tirupati  | Andhra_Pradesh |   216314 |   6543261234 | prasad@gmail.com      | Friend |
++------------+-----------+-----------------+-----------+----------------+----------+--------------+-----------------------+--------+
+5 rows in set (0.04 sec)
+
+UC12:
+
+mysql> create table Person_Contact
+    -> (first_name varchar(100), last_name varchar(100), address varchar(200), phone_number BIGINT(10), email varchar(200), primary key (first_name));
+Query OK, 0 rows affected, 1 warning (2.02 sec)
+
+mysql> desc person_contact;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| first_name   | varchar(100) | NO   | PRI | NULL    |       |
+| last_name    | varchar(100) | YES  |     | NULL    |       |
+| address      | varchar(200) | YES  |     | NULL    |       |
+| phone_number | bigint       | YES  |     | NULL    |       |
+| email        | varchar(200) | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+5 rows in set (0.06 sec)
+
+mysql> create table person_address
+    -> (zip_code int, city varchar(100), state varchar(100), primary key (zip_code));
+Query OK, 0 rows affected (1.39 sec)
+
+mysql> desc person_address;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| zip_code | int          | NO   | PRI | NULL    |       |
+| city     | varchar(100) | YES  |     | NULL    |       |
+| state    | varchar(100) | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> create table person_contact_address
+    -> (first_name varchar(100), zip_code int, foreign key (first_name) references person_contact(first_name),
+    -> foreign key (zip_code) references person_address (zip_code));
+Query OK, 0 rows affected (2.30 sec)
+
+mysql> insert into person_contact (first_name, last_name, address, phone_number, email) values
+    -> ('Janaki', 'Prema', 'Marathahalli', 9676564636, 'prema@gmail.com'),
+    -> ('Teja', 'Navya', 'Indhira_Nagar', 6356785432, 'tejasree@gmail.com');
+Query OK, 2 rows affected (0.36 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from person_contact;
++------------+-----------+---------------+--------------+--------------------+
+| first_name | last_name | address       | phone_number | email              |
++------------+-----------+---------------+--------------+--------------------+
+| Janaki     | Prema     | Marathahalli  |   9676564636 | prema@gmail.com    |
+| Teja       | Navya     | Indhira_Nagar |   6356785432 | tejasree@gmail.com |
++------------+-----------+---------------+--------------+--------------------+
+2 rows in set (0.00 sec)
+
+mysql> insert into person_address(zip_code, city, state) values
+    -> (567686, 'Chittoor', 'Andhra_Pradesh'),
+    -> (516216, 'Tirupati', 'Andhra_Pradesh');
+Query OK, 2 rows affected (0.14 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from person_address;
++----------+----------+----------------+
+| zip_code | city     | state          |
++----------+----------+----------------+
+|   516216 | Tirupati | Andhra_Pradesh |
+|   567686 | Chittoor | Andhra_Pradesh |
++----------+----------+----------------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
